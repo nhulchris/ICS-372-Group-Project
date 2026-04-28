@@ -7,7 +7,7 @@ import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import com.brewbite.model.Order;
 import com.brewbite.model.OrderQueue;
-
+import com.brewbite.system.SystemState;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -16,7 +16,7 @@ public class BaristaController {
     @FXML
     private ListView<String> orderQueueListView;
 
-    private OrderQueue orderQueue = new OrderQueue();
+    private OrderQueue orderQueue = SystemState.getOrderQueue();
 
     public void setOrderQueue(OrderQueue queue) {
         this.orderQueue = queue;
