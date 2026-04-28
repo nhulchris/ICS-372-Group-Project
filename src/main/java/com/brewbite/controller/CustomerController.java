@@ -4,6 +4,7 @@ import com.brewbite.factory.MenuItemFactory;
 import com.brewbite.model.*;
 import com.brewbite.observer.BaristaObserver;
 import com.brewbite.observer.ManagerObserver;
+import com.brewbite.service.PersistenceService;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ public class CustomerController {
     private Order currentOrder = new Order();
     private OrderQueue orderQueue = new OrderQueue();
     private Inventory inventory = new Inventory();
+    private PersistenceService persistenceService = new PersistenceService();
 
     @FXML
     public void initialize() {
@@ -39,6 +41,9 @@ public class CustomerController {
         // Initialize inventory
         inventory.addItem("CoffeeBeans", 5);
         inventory.addItem("Flour", 5);
+
+        System.out.println("Loaded inventory data: " + persistenceService.loadInventorySnapshot());
+        System.out.println("Loaded order data: " + persistenceService.loadOrderSnapshot());
     }
 
     @FXML
@@ -71,7 +76,11 @@ public class CustomerController {
             item = MenuItemFactory.createItem("pastry", selected, 2.0);
             inventory.deduct("Flour", 1);
         }
-
+        persistenceService.saveInventorySnapshot(
+            "{ \"CoffeeBeans\": " + (inventory.isAvailable("CoffeeBeans", 1) ? "available" : "low") +
+            ", \"Flour\": " + (inventory.isAvailable("Flour", 1) ? "available" : "low") + " }"
+        );
+                
         OrderItem orderItem = new OrderItem(item, 1);
         currentOrder.addItem(orderItem);
 
@@ -86,6 +95,9 @@ public class CustomerController {
         System.out.println("Order sent to queue. Total: $" + total);
 
         orderQueue.addOrder(currentOrder);
+        persistenceService.saveOrderSnapshot(
+            "{ \"total\": " + total + ", \"status\": \"Queued\" }"
+        );
 
         orderListView.getItems().clear();
         currentOrder = new Order();
