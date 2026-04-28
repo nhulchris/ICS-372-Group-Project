@@ -26,4 +26,8 @@
         </VBox>
     </right>
 
+<bottom>
+    <Button text="Back" onAction="#goBack" />
+</bottom>
+
 </BorderPane>
