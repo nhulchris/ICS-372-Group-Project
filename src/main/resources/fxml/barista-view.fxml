@@ -13,4 +13,6 @@
 
     <Button text="Complete Next Order" onAction="#handleCompleteOrder"/>
 
+<Button text="Back" onAction="#goBack" />
+
 </VBox>
