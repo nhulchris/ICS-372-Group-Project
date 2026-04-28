@@ -15,6 +15,15 @@ public class ManagerController {
     private Inventory inventory = SystemState.getInventory();
 
     @FXML
+    private ListView<String> inventoryListView;
+
+    @FXML
+    public void initialize() {
+        inventoryListView.getItems().add("CoffeeBeans: 5");
+        inventoryListView.getItems().add("Flour: 5");
+    }
+
+    @FXML
     public void handleRestock() {
         System.out.println("Inventory restocked.");
     }
