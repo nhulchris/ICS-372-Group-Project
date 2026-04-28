@@ -1,3 +1,6 @@
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+
 package com.brewbite;
 
 import javafx.application.Application;
