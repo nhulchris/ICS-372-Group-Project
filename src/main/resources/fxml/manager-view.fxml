@@ -13,4 +13,6 @@
 
 <Button text="Back" onAction="#goBack" />
 
+<ListView fx:id="inventoryListView" />
+
 </VBox>
