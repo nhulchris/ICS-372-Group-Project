@@ -99,7 +99,7 @@ public class CustomerController {
 
         System.out.printf("Order sent to queue. Total: $%.2f%n", total);
 
-        System.out.println("Revenue gained: $%.2f%n" + total);
+        System.out.printf("Revenue gained: $%.2f%n", total);
 
         orderQueue.addOrder(currentOrder);
         persistenceService.saveOrderSnapshot(
