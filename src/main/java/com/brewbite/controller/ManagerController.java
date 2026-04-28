@@ -7,10 +7,14 @@ import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import com.brewbite.model.Inventory;
+import com.brewbite.system.SystemState;
+
 public class ManagerController {
 
-    @FXML
     private Inventory inventory = SystemState.getInventory();
+
+    @FXML
     public void handleRestock() {
         System.out.println("Inventory restocked.");
     }
