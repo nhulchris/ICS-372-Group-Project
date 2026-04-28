@@ -13,7 +13,6 @@ public class ManagerController {
     public void handleRestock() {
         System.out.println("Inventory restocked.");
     }
-}
 
     @FXML
     public void goBack(ActionEvent event) {
