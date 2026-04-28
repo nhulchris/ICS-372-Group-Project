@@ -23,7 +23,7 @@ public class BaristaController {
     
         for (int i = 0; i < order.getItems().size(); i++) {
             OrderItem item = order.getItems().get(i);
-            orderText.append(item.getItem().getName());
+            orderText.append(item.getMenuItem().getName());
         
             if (i < order.getItems().size() - 1) {
                 orderText.append(", ");
