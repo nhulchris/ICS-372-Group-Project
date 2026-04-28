@@ -14,6 +14,15 @@ import javafx.scene.control.ListView;
 public class BaristaController {
 
     @FXML
+    public void initialize() {
+        if (!orderQueue.getOrders().isEmpty()) {
+            for (Order order : orderQueue.getOrders()) {
+                orderQueueListView.getItems().add("Queued Order");
+            }
+        }
+    }
+
+    @FXML
     private ListView<String> orderQueueListView;
 
     private OrderQueue orderQueue = SystemState.getOrderQueue();
@@ -21,15 +30,19 @@ public class BaristaController {
     public void setOrderQueue(OrderQueue queue) {
         this.orderQueue = queue;
     }
-
+    
     @FXML
     public void handleCompleteOrder() {
         if (orderQueue == null) return;
-
+    
         Order order = orderQueue.getNextOrder();
-
+    
         if (order != null) {
-            orderQueueListView.getItems().remove(0);
+    
+            if (!orderQueueListView.getItems().isEmpty()) {
+                orderQueueListView.getItems().remove(0);
+            }
+    
             System.out.println("Order completed.");
         }
     }
