@@ -97,9 +97,9 @@ public class CustomerController {
 
         double total = currentOrder.calculateTotal();
 
-        System.out.println("Order sent to queue. Total: $" + total);
+        System.out.printf("Order sent to queue. Total: $%.2f%n", total);
 
-        System.out.println("Revenue gained: $" + total);
+        System.out.println("Revenue gained: $%.2f%n" + total);
 
         orderQueue.addOrder(currentOrder);
         persistenceService.saveOrderSnapshot(
