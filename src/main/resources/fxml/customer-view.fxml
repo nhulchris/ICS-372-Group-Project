@@ -7,7 +7,7 @@
             fx:controller="com.brewbite.controller.CustomerController">
 
     <top>
-        <Label text="Brew & Bite Cafe - Customer Ordering"
+        <Label text="Brew &amp; Bite Cafe - Customer Ordering"
                style="-fx-font-size: 18px; -fx-padding: 10;" />
     </top>
 
