@@ -16,7 +16,7 @@ public class BaristaController {
     @FXML
     private ListView<String> orderQueueListView;
 
-    private OrderQueue orderQueue;
+    private OrderQueue orderQueue = new OrderQueue();
 
     public void setOrderQueue(OrderQueue queue) {
         this.orderQueue = queue;
