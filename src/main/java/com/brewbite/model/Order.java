@@ -17,6 +17,10 @@ public class Order {
         items.add(item);
     }
 
+    public List<OrderItem> getItems() {
+    return items;
+    }
+
     public double calculateTotal() {
         double total = 0;
         for (OrderItem item : items) {
