@@ -15,10 +15,17 @@ public class BaristaController {
 
     @FXML
     public void initialize() {
-        if (!orderQueue.getOrders().isEmpty()) {
-            for (Order order : orderQueue.getOrders()) {
-                orderQueueListView.getItems().add("Queued Order");
+        int count = 1;
+    
+        for (Order order : orderQueue.getOrders()) {
+            StringBuilder orderText = new StringBuilder("Order #" + count + ": ");
+    
+            for (OrderItem item : order.getItems()) {
+                orderText.append(item.getItem().getName()).append(", ");
             }
+    
+            orderQueueListView.getItems().add(orderText.toString());
+            count++;
         }
     }
 
