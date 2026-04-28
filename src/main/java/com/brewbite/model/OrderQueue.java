@@ -22,6 +22,10 @@ public class OrderQueue implements Subject {
         return orders.poll();
     }
 
+    public List<Order> getOrders() {
+    return new ArrayList<>(orders);
+    }
+
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
