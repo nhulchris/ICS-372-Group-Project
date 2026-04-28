@@ -107,7 +107,6 @@ public class CustomerController {
         orderListView.getItems().clear();
         currentOrder = new Order();
     }
-}
 
     @FXML
     public void goBack(ActionEvent event) {
@@ -120,3 +119,4 @@ public class CustomerController {
             e.printStackTrace();
         }
     }
+}
