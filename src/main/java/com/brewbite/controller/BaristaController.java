@@ -1,5 +1,6 @@
 package com.brewbite.controller;
 
+import com.brewbite.model.OrderItem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,10 +21,15 @@ public class BaristaController {
         for (Order order : orderQueue.getOrders()) {
             StringBuilder orderText = new StringBuilder("Order #" + count + ": ");
     
-            for (OrderItem item : order.getItems()) {
-                orderText.append(item.getItem().getName()).append(", ");
+        for (int i = 0; i < order.getItems().size(); i++) {
+            OrderItem item = order.getItems().get(i);
+            orderText.append(item.getItem().getName());
+        
+            if (i < order.getItems().size() - 1) {
+                orderText.append(", ");
             }
-    
+        }
+            
             orderQueueListView.getItems().add(orderText.toString());
             count++;
         }
