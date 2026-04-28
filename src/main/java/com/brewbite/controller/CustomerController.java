@@ -10,7 +10,7 @@ import com.brewbite.model.*;
 import com.brewbite.observer.BaristaObserver;
 import com.brewbite.observer.ManagerObserver;
 import com.brewbite.service.PersistenceService;
-
+import com.brewbite.system.SystemState;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -24,8 +24,8 @@ public class CustomerController {
     private ListView<String> orderListView;
 
     private Order currentOrder = new Order();
-    private OrderQueue orderQueue = new OrderQueue();
-    private Inventory inventory = new Inventory();
+    private OrderQueue orderQueue = SystemState.getOrderQueue();
+    private Inventory inventory = SystemState.getInventory();
     private PersistenceService persistenceService = new PersistenceService();
 
     @FXML
