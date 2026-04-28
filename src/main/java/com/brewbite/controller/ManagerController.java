@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 public class ManagerController {
 
     @FXML
+    private Inventory inventory = SystemState.getInventory();
     public void handleRestock() {
         System.out.println("Inventory restocked.");
     }
