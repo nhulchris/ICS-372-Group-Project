@@ -3,6 +3,7 @@
 ## Team Members
 - Chris Nhul
 - Garvin Yau
+- Salman Ahmed
 
 ## Project Description
 JavaFX-based cafe ordering system implementing MVC architecture, Observer Pattern, and Factory Method Pattern.
