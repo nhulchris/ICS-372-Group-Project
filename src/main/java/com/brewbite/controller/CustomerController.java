@@ -33,10 +33,20 @@ public class CustomerController {
 
         // Load menu (temporary hardcoded)
         menuListView.setItems(FXCollections.observableArrayList(
-                "Latte",
-                "Espresso",
-                "Croissant",
-                "Muffin"
+        "Latte",
+        "Espresso",
+        "Americano",
+        "Cappuccino",
+        "Mocha",
+        "Hot Chocolate",
+        "Iced Coffee",
+        "Chai Latte",
+        "Croissant",
+        "Muffin",
+        "Bagel",
+        "Chocolate Chip Cookie",
+        "Brownie",
+        "Cinnamon Roll"
         ));
 
         // Attach observers
@@ -60,11 +70,14 @@ public class CustomerController {
         boolean available;
 
         // Check inventory
-        if (selected.equalsIgnoreCase("Latte") || selected.equalsIgnoreCase("Espresso")) {
-            available = inventory.isAvailable("CoffeeBeans", 1);
-        } else {
-            available = inventory.isAvailable("Flour", 1);
-        }
+       if (selected.equalsIgnoreCase("Latte")
+        || selected.equalsIgnoreCase("Espresso")
+        || selected.equalsIgnoreCase("Americano")
+        || selected.equalsIgnoreCase("Cappuccino")
+        || selected.equalsIgnoreCase("Mocha")
+        || selected.equalsIgnoreCase("Hot Chocolate")
+        || selected.equalsIgnoreCase("Iced Coffee")
+        || selected.equalsIgnoreCase("Chai Latte")) 
 
         if (!available) {
             System.out.println("Item out of stock: " + selected);
