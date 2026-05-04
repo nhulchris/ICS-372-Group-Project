@@ -1,24 +1,23 @@
 package com.brewbite.model;
 
 public class OrderItem {
-
-    private MenuItem menuItem;
+    private MenuItem item;
     private int quantity;
 
-    public OrderItem(MenuItem menuItem, int quantity) {
-        this.menuItem = menuItem;
+    public OrderItem(MenuItem item, int quantity) {
+        this.item = item;
         this.quantity = quantity;
     }
 
-    public MenuItem getMenuItem() {
-        return menuItem;
+    public double getSubtotal() {
+        return item.calculatePrice() * quantity;
+    }
+
+    public MenuItem getItem() {
+        return item;
     }
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public double getTotalPrice() {
-        return menuItem.getPrice() * quantity;
     }
 }

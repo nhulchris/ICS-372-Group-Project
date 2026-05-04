@@ -10,10 +10,15 @@ JavaFX-based cafe ordering system implementing MVC architecture, Observer Patter
 
 ## Tech Stack
 - Java 21
-- JavaFX
+- JavaFX 26
 - JSON (Gson or Jackson)
+- Maven
 
 ## Features
 - Customer ordering
 - Barista fulfillment
 - Manager inventory system
+
+## How to run
+- From command line, 
+`mvc javafx:run`

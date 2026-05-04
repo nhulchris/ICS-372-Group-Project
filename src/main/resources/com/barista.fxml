@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.brewbite.controller.BaristaController"
+            prefWidth="600" prefHeight="400">
+
+    <children>
+
+        <Label text="Barista Dashboard"
+               layoutX="20" layoutY="20"
+               style="-fx-font-size: 18px;"/>
+
+        <ListView fx:id="orderListView"
+                  layoutX="20"
+                  layoutY="60"
+                  prefWidth="550"
+                  prefHeight="300"/>
+
+        <Button text="Back"
+        layoutX="520"
+        layoutY="20"
+        onAction="#handleBack"/>
+
+    </children>
+</AnchorPane>

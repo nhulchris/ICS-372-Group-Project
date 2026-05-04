@@ -1,78 +1,70 @@
 package com.brewbite.controller;
 
-import com.brewbite.model.OrderItem;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.event.ActionEvent;
+import com.brewbite.facade.CafeSystem;
 import com.brewbite.model.Order;
-import com.brewbite.model.OrderQueue;
-import com.brewbite.system.SystemState;
+import com.brewbite.model.OrderStatus;
+import com.brewbite.service.OrderObserver;
+import com.brewbite.util.SceneManager;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-public class BaristaController {
+import java.util.List;
+
+public class BaristaController implements OrderObserver {
+
+    @FXML
+    private ListView<Order> orderListView;
+
+    private final ObservableList<Order> observableOrders =
+            FXCollections.observableArrayList();
+
+    private final CafeSystem cafeSystem = CafeSystem.getInstance();
 
     @FXML
     public void initialize() {
-        int count = 1;
-    
-        for (Order order : orderQueue.getOrders()) {
-            StringBuilder orderText = new StringBuilder("Order #" + count + ": ");
-    
-        for (int i = 0; i < order.getItems().size(); i++) {
-            OrderItem item = order.getItems().get(i);
-            orderText.append(item.getMenuItem().getName());
-        
-            if (i < order.getItems().size() - 1) {
-                orderText.append(", ");
-            }
-        }
-            
-            orderQueueListView.getItems().add(orderText.toString());
-            count++;
-        }
+
+        cafeSystem.getOrderManager().addObserver(this);
+
+        orderListView.setItems(observableOrders);
+    }
+
+    @Override
+    public void updateOrders(List<Order> orders) {
+        System.out.println("Barista received order update: " + orders.size());
+        observableOrders.setAll(orders);
     }
 
     @FXML
-    private ListView<String> orderQueueListView;
-
-    private OrderQueue orderQueue = SystemState.getOrderQueue();
-
-    public void setOrderQueue(OrderQueue queue) {
-        this.orderQueue = queue;
+    private void handleBack() {
+        SceneManager.switchScene("/com/brewbite/view/role-selection.fxml");
     }
-    
+
     @FXML
-    public void handleCompleteOrder() {
-        if (orderQueue == null) return;
-    
-        Order order = orderQueue.getNextOrder();
-    
-        if (order != null) {
-    
-            if (!orderQueueListView.getItems().isEmpty()) {
-                orderQueueListView.getItems().remove(0);
-            }
-    
-            System.out.println("Order completed.");
-        }
-    }
-    
-    @FXML
-    public void goBack(ActionEvent event) {
-        try {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/role-selection.fxml"));
-            Scene scene = new Scene(loader.load(), 600, 400);
-            stage.setScene(scene);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void handleStartOrder() {
+
+        Order selected = orderListView.getSelectionModel().getSelectedItem();
+
+        if (selected == null) return;
+
+        cafeSystem.updateOrderStatus(
+                selected.getOrderId(),
+                OrderStatus.IN_PROGRESS
+        );
     }
 
-    public void addOrderToView(String orderText) {
-        orderQueueListView.getItems().add(orderText);
+    @FXML
+    private void handleCompleteOrder() {
+
+        Order selected = orderListView.getSelectionModel().getSelectedItem();
+
+        if (selected == null) return;
+
+        cafeSystem.updateOrderStatus(
+                selected.getOrderId(),
+                OrderStatus.COMPLETED
+        );
     }
 }

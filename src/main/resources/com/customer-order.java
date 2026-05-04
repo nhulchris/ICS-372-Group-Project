@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.brewbite.controller.CustomerOrderController"
+            prefWidth="650" prefHeight="420">
+
+    <children>
+
+        <!-- TITLE -->
+        <Label text="Customer Order"
+               layoutX="20" layoutY="10"
+               style="-fx-font-size: 18px;" />
+
+        <!-- MENU -->
+        <Label text="Menu"
+               layoutX="20" layoutY="40"/>
+        <ListView fx:id="menuListView"
+                  layoutX="20"
+                  layoutY="60"
+                  prefWidth="250"
+                  prefHeight="250"/>
+
+        <!-- CART -->
+        <Label text="Cart"
+               layoutX="300" layoutY="40"/>
+        <ListView fx:id="cartListView"
+                  layoutX="300"
+                  layoutY="60"
+                  prefWidth="250"
+                  prefHeight="250"/>
+
+        <!-- QUANTITY -->
+        <Label text="Qty:"
+               layoutX="20"
+               layoutY="330"/>
+        <TextField fx:id="quantityField"
+                   layoutX="60"
+                   layoutY="325"
+                   prefWidth="60"/>
+
+        <!-- ADD BUTTON -->
+        <Button text="Add to Cart"
+                layoutX="130"
+                layoutY="325"
+                onAction="#handleAddToCart"/>
+
+        <!-- PLACE ORDER -->
+        <Button text="Place Order"
+                layoutX="300"
+                layoutY="325"
+                onAction="#handlePlaceOrder"/>
+
+        <!-- TOTAL -->
+        <Label fx:id="totalLabel"
+               layoutX="450"
+               layoutY="330"
+               text="Total: $0.00"/>
+
+        <!-- STATUS -->
+        <Label fx:id="statusLabel"
+               layoutX="20"
+               layoutY="360"
+               prefWidth="550"
+               text=""/>
+
+        <Button text="Back"
+        layoutX="520"
+        layoutY="20"
+        onAction="#handleBack"/>
+
+    </children>
+</AnchorPane>

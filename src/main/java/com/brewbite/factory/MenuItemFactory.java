@@ -1,19 +1,29 @@
 package com.brewbite.factory;
 
+import java.util.*;
 import com.brewbite.model.*;
-
-import java.util.List;
 
 public class MenuItemFactory {
 
-    public static MenuItem createItem(String type, String name, double price) {
+    public static MenuItem createMenuItem(
+            String type,
+            String name,
+            double basePrice,
+            Map<String, Integer> ingredients,
+            Size size,
+            List<Customization> customizations
+    ) {
 
-        if (type.equalsIgnoreCase("beverage")) {
-            return new Beverage(name, price, "Small", List.of());
-        } else if (type.equalsIgnoreCase("pastry")) {
-            return new Pastry(name, price);
-        }
+        return switch (type.toLowerCase()) {
 
-        throw new IllegalArgumentException("Invalid menu item type");
+            case "beverage" ->
+                    new Beverage(name, basePrice, ingredients, size, customizations);
+
+            case "pastry" ->
+                    new Pastry(name, basePrice, ingredients);
+
+            default ->
+                    throw new IllegalArgumentException("Unknown type: " + type);
+        };
     }
 }

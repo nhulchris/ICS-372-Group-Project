@@ -1,0 +1,15 @@
+{
+  "orders": [
+    {
+      "orderId": 1,
+      "customerName": "Alice",
+      "status": "PENDING",
+      "items": [
+        {
+          "menuItemName": "Latte",
+          "quantity": 2
+        }
+      ]
+    }
+  ]
+}

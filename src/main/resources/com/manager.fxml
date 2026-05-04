@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.brewbite.controller.ManagerController"
+            prefWidth="650" prefHeight="550">
+
+    <children>
+
+       <Label text="Manager Dashboard"
+              layoutX="20" layoutY="20"
+              style="-fx-font-size: 18px;"/>
+
+       <!-- ORDERS -->
+       <Label text="Orders"
+              layoutX="20" layoutY="50"/>
+
+       <ListView fx:id="orderListView"
+                 layoutX="20"
+                 layoutY="70"
+                 prefWidth="250"
+                 prefHeight="250"/>
+
+        <!-- INVENTORY -->
+       <Label text="Inventory"
+              layoutX="300" layoutY="50"/>
+
+       <TableView fx:id="inventoryTable"
+                  layoutX="300"
+                  layoutY="70"
+                  prefWidth="270"
+                  prefHeight="180">
+
+              <columns>
+                <TableColumn fx:id="ingredientColumn" text="Ingredient" prefWidth="150"/>
+                <TableColumn fx:id="stockColumn" text="Stock" prefWidth="120"/>
+              </columns>
+
+        </TableView>
+
+        <!-- RESTOCK -->
+       <TextField fx:id="amountField"
+                   layoutX="300"
+                   layoutY="260"
+                   prefWidth="120"
+                   promptText="Amount"/>
+
+       <Button text="Restock"
+                layoutX="430"
+                layoutY="260"
+                onAction="#handleRestock"/>
+
+       <Label fx:id="statusLabel"
+               layoutX="300"
+               layoutY="300"
+               prefWidth="250"/>
+
+       <!-- MENU MANAGEMENT -->
+       <Label text="Menu"
+              layoutX="20"
+              layoutY="330"/>
+
+       <ListView fx:id="menuListView"
+              layoutX="20"
+              layoutY="350"
+              prefWidth="250"
+              prefHeight="150"/>
+
+       <TextField fx:id="itemNameField"
+              layoutX="300"
+              layoutY="330"
+              promptText="Item Name"/>
+
+       <TextField fx:id="itemPriceField"
+              layoutX="300"
+              layoutY="360"
+              promptText="Price"/>
+
+       <ComboBox fx:id="itemTypeBox"
+              layoutX="300"
+              layoutY="390"
+              prefWidth="120"/>
+
+       <Button text="Add Item"
+              layoutX="450"
+              layoutY="330"
+              onAction="#handleAddMenuItem"/>
+
+       <Button text="Remove Item"
+              layoutX="450"
+              layoutY="360"
+              onAction="#handleRemoveMenuItem"/>
+
+       <Button text="Back"
+              layoutX="520"
+              layoutY="20"
+              onAction="#handleBack"/>
+
+    </children>
+</AnchorPane>

@@ -1,0 +1,22 @@
+{
+    "menu" : [
+        {
+            "type" : "beverage",
+            "name" : "Latte",
+            "price" : 4.00,
+            "ingredients" : {
+                "Milk" : 2,
+                "Coffee Beans" : 1
+            }
+        },
+        {
+            "type" : "pastry",
+            "name" : "Croissant",
+            "price" : 3.00,
+            "ingredients" : {
+                "Flour" : 2,
+                "Butter" : 1
+            }
+        }
+    ]
+}
