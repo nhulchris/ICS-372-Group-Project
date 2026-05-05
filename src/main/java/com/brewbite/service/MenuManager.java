@@ -5,15 +5,21 @@ import com.brewbite.model.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Subject in the Observer pattern for the menu.
+ * Holds the in-memory list of MenuItem objects the application is using
+ * and notifies any registered MenuObserver whenever the menu changes.
+ */
 public class MenuManager {
 
-    private List<MenuItem> menu;
+    private final List<MenuItem> menu;
+    private final List<MenuObserver> observers = new ArrayList<>();
 
-    // =====================
-    // OBSERVER SUPPORT
-    // =====================
-    private List<MenuObserver> observers = new ArrayList<>();
+    public MenuManager(List<MenuItem> menu) {
+        this.menu = new ArrayList<>(menu);
+    }
 
+    // ---- Observer support ----
     public void addObserver(MenuObserver observer) {
         observers.add(observer);
     }
@@ -22,32 +28,31 @@ public class MenuManager {
         observers.remove(observer);
     }
 
-    private void notifyObservers() {
+    /**
+     * Notifies all registered observers that the menu has changed.
+     * Public so controllers can trigger a refresh after editing an
+     * existing MenuItem's fields in-place (e.g., the manager's
+     * "Modify Item" feature).
+     */
+    public void notifyMenuChanged() {
         for (MenuObserver o : observers) {
             o.updateMenu(menu);
         }
     }
 
-    public MenuManager(List<MenuItem> menu) {
-        this.menu = new ArrayList<>(menu);
-    }
-
-    // =====================
-    // CORE
-    // =====================
-
+    // ---- Core ----
     public List<MenuItem> getMenu() {
         return menu;
     }
 
     public void addItem(MenuItem item) {
         menu.add(item);
-        notifyObservers();
+        notifyMenuChanged();
     }
 
     public void removeItem(MenuItem item) {
         menu.remove(item);
-        notifyObservers();
+        notifyMenuChanged();
     }
 
     public MenuItem findByName(String name) {
