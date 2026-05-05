@@ -1,21 +1,27 @@
 package com.brewbite;
 
 import com.brewbite.facade.CafeSystem;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
 import com.brewbite.util.SceneManager;
 
-public class BrewBiteApp extends Application {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-    private static CafeSystem cafeSystem;
+/**
+ * Main entry point for the Brew & Bite Cafe System.
+ * Bootstraps the CafeSystem facade, loads the role-selection scene,
+ * and ensures all data is persisted on application shutdown.
+ */
+public class BrewBiteApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println(SceneManager.class.getResource("/com/brewbite/view/barista.fxml"));
         try {
+            // Initialize the facade up front so menu, inventory, and saved
+            // orders are loaded before any scene tries to read from them.
+            CafeSystem.getInstance();
 
             SceneManager.setStage(primaryStage);
 
@@ -24,7 +30,8 @@ public class BrewBiteApp extends Application {
             );
 
             primaryStage.setTitle("Brew & Bite");
-            primaryStage.setScene(new Scene(root, 400, 300));
+            primaryStage.setScene(new Scene(root, 400, 320));
+            primaryStage.setOnCloseRequest(e -> CafeSystem.getInstance().saveData());
             primaryStage.show();
 
         } catch (Exception e) {
@@ -32,9 +39,6 @@ public class BrewBiteApp extends Application {
         }
     }
 
-    public static CafeSystem getCafeSystem() {
-        return cafeSystem;
-    }
     @Override
     public void stop() {
         System.out.println("Saving data...");
