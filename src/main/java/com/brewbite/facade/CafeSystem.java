@@ -177,10 +177,16 @@ public class CafeSystem {
         return currentCustomerName;
     }
 
-    // ---- Persistence ----
+// ---- Persistence ----
     public void saveData() {
-        DataStore.saveText("orders.json",    menuAwareGson.toJson(orderManager.getOrders()));
-        DataStore.saveText("inventory.json", menuAwareGson.toJson(inventoryManager.getIngredients()));
-        DataStore.saveText("menu.json",      menuAwareGson.toJson(menuManager.getMenu()));
+        Type ordersType = new TypeToken<List<Order>>() {}.getType();
+        Type menuType   = new TypeToken<List<MenuItem>>() {}.getType();
+
+        DataStore.saveText("orders.json",
+                menuAwareGson.toJson(orderManager.getOrders(), ordersType));
+        DataStore.saveText("inventory.json",
+                menuAwareGson.toJson(inventoryManager.getIngredients()));
+        DataStore.saveText("menu.json",
+                menuAwareGson.toJson(menuManager.getMenu(), menuType));
     }
 }
