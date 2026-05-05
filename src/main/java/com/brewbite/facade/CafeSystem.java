@@ -2,6 +2,7 @@ package com.brewbite.facade;
 
 import com.brewbite.model.*;
 import com.brewbite.persistence.DataLoader;
+import com.brewbite.persistence.MenuItemAdapter;
 import com.brewbite.service.*;
 import com.brewbite.util.DataStore;
 
@@ -31,6 +32,16 @@ public class CafeSystem {
 
     private String currentCustomerName;
 
+    /**
+     * Gson instance configured with the custom adapter for the abstract
+     * MenuItem class. Used everywhere we serialize/deserialize MenuItem
+     * (or anything containing one, e.g., Order -> OrderItem -> MenuItem).
+     */
+    private static final Gson menuAwareGson = new GsonBuilder()
+            .setPrettyPrinting()
+            .registerTypeAdapter(MenuItem.class, new MenuItemAdapter())
+            .create();
+
     public static CafeSystem getInstance() {
         if (instance == null) {
             instance = new CafeSystem();
@@ -39,12 +50,8 @@ public class CafeSystem {
     }
 
     private CafeSystem() {
-        // Try persisted state first; fall back to bundled defaults on first run.
         Inventory inventory = loadInventoryWithFallback();
-        List<MenuItem> menu = DataLoader.loadMenu("/menu.json");
-        if (menu == null) {
-            menu = new ArrayList<>();
-        }
+        List<MenuItem> menu = loadMenuWithFallback();
 
         this.orderManager = new OrderManager();
         this.inventoryManager = new InventoryManager(inventory);
@@ -71,12 +78,29 @@ public class CafeSystem {
         return DataLoader.loadInventory("/inventory.json");
     }
 
+    /**
+     * Loads the user's persisted menu from ~/brewbite-data/menu.json if present;
+     * otherwise falls back to the bundled default in resources.
+     */
+    private List<MenuItem> loadMenuWithFallback() {
+        Type listType = new TypeToken<List<MenuItem>>() {}.getType();
+        List<MenuItem> saved = DataStore.loadList("menu.json", listType, menuAwareGson);
+
+        if (saved != null && !saved.isEmpty()) {
+            return saved;
+        }
+
+        List<MenuItem> menu = DataLoader.loadMenu("/menu.json");
+        if (menu == null) menu = new ArrayList<>();
+        return menu;
+    }
+
     private void loadSavedOrders() {
         Type orderType = new TypeToken<List<Order>>() {}.getType();
-        List<Order> savedOrders = DataStore.loadList("orders.json", orderType);
+        List<Order> savedOrders = DataStore.loadList("orders.json", orderType, menuAwareGson);
 
         if (savedOrders == null || savedOrders.isEmpty()) {
-            return; // first run or no saved orders — nothing to do
+            return;
         }
 
         for (Order o : savedOrders) {
@@ -113,13 +137,6 @@ public class CafeSystem {
         return new Order(customerName);
     }
 
-    /**
-     * Attempts to place an order. Verifies the order is non-empty and
-     * inventory is sufficient, deducts ingredients, registers the order
-     * with PENDING status, and notifies observers.
-     *
-     * @return true if the order was placed; false if empty or inventory insufficient.
-     */
     public boolean placeOrder(Order order) {
         if (order == null || order.getItems().isEmpty()) {
             return false;
@@ -162,9 +179,8 @@ public class CafeSystem {
 
     // ---- Persistence ----
     public void saveData() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        DataStore.saveText("orders.json", gson.toJson(orderManager.getOrders()));
-        DataStore.saveText("inventory.json", gson.toJson(inventoryManager.getIngredients()));
-        DataStore.saveText("menu.json", gson.toJson(menuManager.getMenu()));
+        DataStore.saveText("orders.json",    menuAwareGson.toJson(orderManager.getOrders()));
+        DataStore.saveText("inventory.json", menuAwareGson.toJson(inventoryManager.getIngredients()));
+        DataStore.saveText("menu.json",      menuAwareGson.toJson(menuManager.getMenu()));
     }
 }
