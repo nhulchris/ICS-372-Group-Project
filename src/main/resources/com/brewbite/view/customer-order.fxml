@@ -2,75 +2,71 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.brewbite.controller.CustomerOrderController"
-            prefWidth="650" prefHeight="420">
+            prefWidth="900" prefHeight="600">
 
-    <children>
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets top="15" right="15" bottom="10" left="15"/></padding>
+            <Label text="Customer Order" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" style="-fx-font-size: 14px;"/>
+            <Button text="Back" onAction="#handleBack"/>
+        </HBox>
+    </top>
 
-        <!-- TITLE -->
-        <Label text="Customer Order"
-               layoutX="20" layoutY="10"
-               style="-fx-font-size: 18px;" />
+    <center>
+        <HBox spacing="15">
+            <padding><Insets top="0" right="15" bottom="10" left="15"/></padding>
 
-        <!-- MENU -->
-        <Label text="Menu"
-               layoutX="20" layoutY="40"/>
-        <ListView fx:id="menuListView"
-                  layoutX="20"
-                  layoutY="60"
-                  prefWidth="250"
-                  prefHeight="250"/>
+            <!-- LEFT: Menu + customization panel -->
+            <VBox spacing="8" prefWidth="430">
+                <Label text="Menu" style="-fx-font-weight: bold;"/>
+                <ListView fx:id="menuListView" prefHeight="200"/>
 
-        <!-- CART -->
-        <Label text="Cart"
-               layoutX="300" layoutY="40"/>
-        <ListView fx:id="cartListView"
-                  layoutX="300"
-                  layoutY="60"
-                  prefWidth="250"
-                  prefHeight="250"/>
+                <Label text="Options (beverages only)" style="-fx-font-weight: bold;"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="Size:"/>
+                    <ComboBox fx:id="sizeBox" prefWidth="120"/>
+                    <Label text="Qty:"/>
+                    <TextField fx:id="quantityField" prefWidth="60" text="1"/>
+                </HBox>
 
-        <!-- QUANTITY -->
-        <Label text="Qty:"
-               layoutX="20"
-               layoutY="330"/>
-        <TextField fx:id="quantityField"
-                   layoutX="60"
-                   layoutY="325"
-                   prefWidth="60"/>
+                <Label text="Customizations:"/>
+                <ScrollPane fitToWidth="true" prefHeight="120">
+                    <VBox fx:id="customizationsBox" spacing="4">
+                        <padding><Insets top="4" right="4" bottom="4" left="4"/></padding>
+                    </VBox>
+                </ScrollPane>
 
-        <!-- ADD BUTTON -->
-        <Button text="Add to Cart"
-                layoutX="130"
-                layoutY="325"
-                onAction="#handleAddToCart"/>
+                <HBox spacing="10">
+                    <Button text="Add to Cart" onAction="#handleAddToCart"/>
+                </HBox>
+            </VBox>
 
-        <!-- PLACE ORDER -->
-        <Button text="Place Order"
-                layoutX="300"
-                layoutY="325"
-                onAction="#handlePlaceOrder"/>
+            <!-- RIGHT: Cart -->
+            <VBox spacing="8" prefWidth="430">
+                <Label text="Cart" style="-fx-font-weight: bold;"/>
+                <ListView fx:id="cartListView" prefHeight="380"/>
 
-        <!-- TOTAL -->
-        <Label fx:id="totalLabel"
-               layoutX="450"
-               layoutY="330"
-               text="Total: $0.00"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="totalLabel" text="Total: $0.00"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Remove Selected" onAction="#handleRemoveFromCart"/>
+                    <Button text="Clear Order" onAction="#handleClearOrder"/>
+                </HBox>
 
-        <!-- STATUS -->
-        <Label fx:id="statusLabel"
-               layoutX="20"
-               layoutY="360"
-               prefWidth="550"
-               text=""/>
+                <Button text="Place Order" onAction="#handlePlaceOrder"
+                        prefWidth="430" style="-fx-font-size: 14px;"/>
+            </VBox>
+        </HBox>
+    </center>
 
-        <Button text="Back"
-        layoutX="520"
-        layoutY="20"
-        onAction="#handleBack"/>
-
-    </children>
-</AnchorPane>
+    <bottom>
+        <HBox>
+            <padding><Ins
