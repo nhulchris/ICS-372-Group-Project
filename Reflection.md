@@ -94,13 +94,11 @@ Some examples of items that lived on the board across the project:
 
 The point of including non-coding tasks was to make sure documentation and deliverable work was not deprioritized. When a code task and a documentation task were both in the backlog, the board made the trade-off visible.
 
-*[Insert screenshot of the GitHub Projects board here before final submission. The screenshot should show the Kanban columns with several items distributed across In Progress, In Review, and Done so a reader can see the work was tracked over time.]*
+![GitHub Projects Board](docs/projects-board.png)
 
 ### Reflection on Project Management
 
-Using a project management tool from day one was the single best process decision we made. Before the board existed, we had a list of tasks in a Discord pinned message, and items were getting lost in the chat history. Once everything moved to the board, accountability became clearer — each task had an owner and a status, and stale items were visible at a glance.
-
-The cost was minor: maybe ten minutes a week of board grooming. The benefit was that we never asked "wait, who is doing X?" or "did we ever do Y?" That kind of friction, multiplied across a six-week project, would have cost us much more than the maintenance overhead.
+Using a project management tool was a meaningful process improvement, but we want to be honest about how it played out for us. For the first part of the project, our task tracking was lightweight — a mix of pinned Discord messages, a shared text document, and inline TODO comments in the code. We consolidated this scattered tracking into a proper GitHub Projects Kanban board later in the project as the volume of work grew and the need for clearer ownership became apparent. The board's "created" timestamps therefore reflect when we migrated the items into it rather than when the work itself was first identified. Once the board was in place, accountability became significantly clearer — each task had an owner and a status, and stale items were visible at a glance. The lesson we are taking forward is straightforward: setting up a project management tool from day one is worth the small upfront cost. Doing it later, as we did, recovers most of the benefit but loses the historical record of how the project evolved.
 
 ---
 
