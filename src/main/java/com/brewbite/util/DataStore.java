@@ -20,18 +20,18 @@ public class DataStore {
     private static final String DATA_FOLDER =
             System.getProperty("user.home") + "/brewbite-data";
 
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson defaultGson = new GsonBuilder().setPrettyPrinting().create();
 
     // ---- Object ----
     public static <T> void saveObject(String fileName, T object) {
-        saveText(fileName, gson.toJson(object));
+        saveText(fileName, defaultGson.toJson(object));
     }
 
     public static <T> T loadObject(String fileName, Class<T> clazz) {
         String json = loadText(fileName);
         if (json.isBlank()) return null;
         try {
-            return gson.fromJson(json, clazz);
+            return defaultGson.fromJson(json, clazz);
         } catch (Exception e) {
             System.err.println("Failed to parse " + fileName + ": " + e.getMessage());
             return null;
@@ -46,6 +46,21 @@ public class DataStore {
         String json = loadText(fileName);
         if (json.isBlank()) return null;
         try {
+            return defaultGson.fromJson(json, type);
+        } catch (Exception e) {
+            System.err.println("Failed to parse " + fileName + ": " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Type-based overload that uses a caller-provided Gson instance.
+     * Needed for types that require custom adapters (e.g., MenuItem).
+     */
+    public static <T> T loadObject(String fileName, Type type, Gson gson) {
+        String json = loadText(fileName);
+        if (json.isBlank()) return null;
+        try {
             return gson.fromJson(json, type);
         } catch (Exception e) {
             System.err.println("Failed to parse " + fileName + ": " + e.getMessage());
@@ -55,6 +70,21 @@ public class DataStore {
 
     // ---- List ----
     public static <T> List<T> loadList(String fileName, Type type) {
+        String json = loadText(fileName);
+        if (json.isBlank()) return null;
+        try {
+            return defaultGson.fromJson(json, type);
+        } catch (Exception e) {
+            System.err.println("Failed to parse " + fileName + ": " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * List load with a caller-provided Gson instance.
+     * Use for List&lt;Order&gt; or List&lt;MenuItem&gt; which need the MenuItem adapter.
+     */
+    public static <T> List<T> loadList(String fileName, Type type, Gson gson) {
         String json = loadText(fileName);
         if (json.isBlank()) return null;
         try {
