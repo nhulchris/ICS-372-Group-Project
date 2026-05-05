@@ -1,0 +1,22 @@
+# Maven build output
+target/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Java compile output
+*.class
+
+# Local user persistence (runtime, never committed)
+brewbite-data/
