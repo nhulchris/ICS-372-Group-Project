@@ -69,4 +69,9 @@
 
     <bottom>
         <HBox>
-            <padding><Ins
+            <padding><Insets top="6" right="15" bottom="12" left="15"/></padding>
+            <Label fx:id="statusLabel" text="" style="-fx-text-fill: #B00020;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
