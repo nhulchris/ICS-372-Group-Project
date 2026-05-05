@@ -3,6 +3,7 @@ package com.brewbite.controller;
 import com.brewbite.facade.CafeSystem;
 import com.brewbite.factory.MenuItemFactory;
 import com.brewbite.model.*;
+import com.brewbite.model.MenuItem;
 import com.brewbite.service.MenuObserver;
 import com.brewbite.util.SceneManager;
 
