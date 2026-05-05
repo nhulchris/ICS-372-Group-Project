@@ -2,102 +2,108 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.brewbite.controller.ManagerController"
-            prefWidth="650" prefHeight="550">
+            prefWidth="900" prefHeight="640">
 
-    <children>
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets top="15" right="15" bottom="10" left="15"/></padding>
+            <Label text="Manager Dashboard"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="salesLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <Button text="Back" onAction="#handleBack"/>
+        </HBox>
+    </top>
 
-       <Label text="Manager Dashboard"
-              layoutX="20" layoutY="20"
-              style="-fx-font-size: 18px;"/>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
 
-       <!-- ORDERS -->
-       <Label text="Orders"
-              layoutX="20" layoutY="50"/>
+            <!-- INVENTORY TAB -->
+            <Tab text="Inventory">
+                <VBox spacing="10">
+                    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
 
-       <ListView fx:id="orderListView"
-                 layoutX="20"
-                 layoutY="70"
-                 prefWidth="250"
-                 prefHeight="250"/>
+                    <Label text="Current Inventory" style="-fx-font-weight: bold;"/>
+                    <TableView fx:id="inventoryTable" prefHeight="320">
+                        <columns>
+                            <TableColumn fx:id="ingredientColumn" text="Ingredient" prefWidth="300"/>
+                            <TableColumn fx:id="stockColumn"      text="Stock"      prefWidth="180"/>
+                        </columns>
+                    </TableView>
 
-        <!-- INVENTORY -->
-       <Label text="Inventory"
-              layoutX="300" layoutY="50"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Restock amount:"/>
+                        <TextField fx:id="amountField" prefWidth="120" promptText="e.g. 50"/>
+                        <Button text="Restock Selected"  onAction="#handleRestock"/>
+                        <Button text="Add New Ingredient" onAction="#handleAddIngredient"/>
+                        <TextField fx:id="newIngredientField" prefWidth="160"
+                                   promptText="New ingredient name"/>
+                    </HBox>
+                </VBox>
+            </Tab>
 
-       <TableView fx:id="inventoryTable"
-                  layoutX="300"
-                  layoutY="70"
-                  prefWidth="270"
-                  prefHeight="180">
+            <!-- MENU TAB -->
+            <Tab text="Menu Management">
+                <HBox spacing="15">
+                    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
 
-              <columns>
-                <TableColumn fx:id="ingredientColumn" text="Ingredient" prefWidth="150"/>
-                <TableColumn fx:id="stockColumn" text="Stock" prefWidth="120"/>
-              </columns>
+                    <VBox spacing="8" prefWidth="430">
+                        <Label text="Current Menu" style="-fx-font-weight: bold;"/>
+                        <ListView fx:id="menuListView" prefHeight="380"/>
+                        <HBox spacing="10">
+                            <Button text="Remove Selected" onAction="#handleRemoveMenuItem"/>
+                            <Button text="Modify Selected" onAction="#handleModifyMenuItem"/>
+                        </HBox>
+                    </VBox>
 
-        </TableView>
+                    <VBox spacing="8" prefWidth="430">
+                        <Label text="Add / Edit Item" style="-fx-font-weight: bold;"/>
 
-        <!-- RESTOCK -->
-       <TextField fx:id="amountField"
-                   layoutX="300"
-                   layoutY="260"
-                   prefWidth="120"
-                   promptText="Amount"/>
+                        <Label text="Type:"/>
+                        <ComboBox fx:id="itemTypeBox" prefWidth="200"/>
 
-       <Button text="Restock"
-                layoutX="430"
-                layoutY="260"
-                onAction="#handleRestock"/>
+                        <Label text="Name:"/>
+                        <TextField fx:id="itemNameField" promptText="e.g. Vanilla Latte"/>
 
-       <Label fx:id="statusLabel"
-               layoutX="300"
-               layoutY="300"
-               prefWidth="250"/>
+                        <Label text="Base Price:"/>
+                        <TextField fx:id="itemPriceField" promptText="e.g. 4.50"/>
 
-       <!-- MENU MANAGEMENT -->
-       <Label text="Menu"
-              layoutX="20"
-              layoutY="330"/>
+                        <Label text="Ingredients (format: name:qty, name:qty)"/>
+                        <TextField fx:id="itemIngredientsField"
+                                   promptText="e.g. Milk:2, Coffee Beans:1"/>
 
-       <ListView fx:id="menuListView"
-              layoutX="20"
-              layoutY="350"
-              prefWidth="250"
-              prefHeight="150"/>
+                        <HBox spacing="10">
+                            <Button text="Add Item"   onAction="#handleAddMenuItem"/>
+                            <Button text="Clear Form" onAction="#handleClearForm"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </Tab>
 
-       <TextField fx:id="itemNameField"
-              layoutX="300"
-              layoutY="330"
-              promptText="Item Name"/>
+            <!-- ORDERS TAB -->
+            <Tab text="Orders &amp; Sales">
+                <VBox spacing="10">
+                    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
 
-       <TextField fx:id="itemPriceField"
-              layoutX="300"
-              layoutY="360"
-              promptText="Price"/>
+                    <Label text="All Orders (active and historical)"
+                           style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="orderListView" prefHeight="450"/>
+                </VBox>
+            </Tab>
 
-       <ComboBox fx:id="itemTypeBox"
-              layoutX="300"
-              layoutY="390"
-              prefWidth="120"/>
+        </TabPane>
+    </center>
 
-       <Button text="Add Item"
-              layoutX="450"
-              layoutY="330"
-              onAction="#handleAddMenuItem"/>
+    <bottom>
+        <HBox>
+            <padding><Insets top="6" right="15" bottom="12" left="15"/></padding>
+            <Label fx:id="statusLabel" text="" style="-fx-text-fill: #B00020;"/>
+        </HBox>
+    </bottom>
 
-       <Button text="Remove Item"
-              layoutX="450"
-              layoutY="360"
-              onAction="#handleRemoveMenuItem"/>
-
-       <Button text="Back"
-              layoutX="520"
-              layoutY="20"
-              onAction="#handleBack"/>
-
-    </children>
-</AnchorPane>
+</BorderPane>
