@@ -1,0 +1,14 @@
+{
+  "ingredients": [
+    { "name": "Coffee Beans",    "quantity": 200 },
+    { "name": "Tea Leaves",      "quantity": 100 },
+    { "name": "Milk",            "quantity": 200 },
+    { "name": "Sugar",           "quantity": 100 },
+    { "name": "Flour",           "quantity": 150 },
+    { "name": "Butter",          "quantity": 100 },
+    { "name": "Chocolate Chips", "quantity": 80  },
+    { "name": "Blueberries",     "quantity": 50  },
+    { "name": "Oats",            "quantity": 50  },
+    { "name": "Raisins",         "quantity": 50  }
+  ]
+}
