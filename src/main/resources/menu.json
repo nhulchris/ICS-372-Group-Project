@@ -1,22 +1,110 @@
 {
-    "menu" : [
-        {
-            "type" : "beverage",
-            "name" : "Latte",
-            "price" : 4.00,
-            "ingredients" : {
-                "Milk" : 2,
-                "Coffee Beans" : 1
-            }
-        },
-        {
-            "type" : "pastry",
-            "name" : "Croissant",
-            "price" : 3.00,
-            "ingredients" : {
-                "Flour" : 2,
-                "Butter" : 1
-            }
-        }
-    ]
+  "menu": [
+    {
+      "type": "beverage",
+      "name": "Latte",
+      "price": 4.00,
+      "size": "SMALL",
+      "ingredients": { "Milk": 4, "Coffee Beans": 2 },
+      "customizations": [
+        { "name": "Extra Shot",       "price": 0.75, "ingredients": { "Coffee Beans": 1 } },
+        { "name": "Decaf",            "price": 0.00, "ingredients": {} },
+        { "name": "Oat Milk",         "price": 0.50, "ingredients": {} },
+        { "name": "Almond Milk",      "price": 0.50, "ingredients": {} },
+        { "name": "Sugar-Free Syrup", "price": 0.25, "ingredients": { "Sugar": 1 } }
+      ]
+    },
+    {
+      "type": "beverage",
+      "name": "Cappuccino",
+      "price": 4.25,
+      "size": "SMALL",
+      "ingredients": { "Milk": 3, "Coffee Beans": 2 },
+      "customizations": [
+        { "name": "Extra Shot",  "price": 0.75, "ingredients": { "Coffee Beans": 1 } },
+        { "name": "Decaf",       "price": 0.00, "ingredients": {} },
+        { "name": "Oat Milk",    "price": 0.50, "ingredients": {} },
+        { "name": "Almond Milk", "price": 0.50, "ingredients": {} }
+      ]
+    },
+    {
+      "type": "beverage",
+      "name": "Espresso",
+      "price": 3.00,
+      "size": "SMALL",
+      "ingredients": { "Coffee Beans": 2 },
+      "customizations": [
+        { "name": "Extra Shot", "price": 0.75, "ingredients": { "Coffee Beans": 1 } },
+        { "name": "Decaf",      "price": 0.00, "ingredients": {} }
+      ]
+    },
+    {
+      "type": "beverage",
+      "name": "Green Tea",
+      "price": 2.75,
+      "size": "SMALL",
+      "ingredients": { "Tea Leaves": 1 },
+      "customizations": [
+        { "name": "Honey", "price": 0.25, "ingredients": { "Sugar": 1 } }
+      ]
+    },
+    {
+      "type": "beverage",
+      "name": "Black Tea",
+      "price": 2.75,
+      "size": "SMALL",
+      "ingredients": { "Tea Leaves": 1 },
+      "customizations": [
+        { "name": "Milk",  "price": 0.30, "ingredients": { "Milk": 1 } },
+        { "name": "Sugar", "price": 0.10, "ingredients": { "Sugar": 1 } }
+      ]
+    },
+    {
+      "type": "beverage",
+      "name": "Herbal Tea",
+      "price": 2.75,
+      "size": "SMALL",
+      "ingredients": { "Tea Leaves": 1 },
+      "customizations": [
+        { "name": "Honey", "price": 0.25, "ingredients": { "Sugar": 1 } }
+      ]
+    },
+
+    {
+      "type": "pastry",
+      "name": "Butter Croissant",
+      "price": 3.00,
+      "ingredients": { "Flour": 2, "Butter": 2 }
+    },
+    {
+      "type": "pastry",
+      "name": "Chocolate Croissant",
+      "price": 3.50,
+      "ingredients": { "Flour": 2, "Butter": 2, "Chocolate Chips": 1 }
+    },
+    {
+      "type": "pastry",
+      "name": "Blueberry Muffin",
+      "price": 2.75,
+      "ingredients": { "Flour": 2, "Sugar": 1, "Blueberries": 1 }
+    },
+    {
+      "type": "pastry",
+      "name": "Chocolate Chip Muffin",
+      "price": 2.75,
+      "ingredients": { "Flour": 2, "Sugar": 1, "Chocolate Chips": 1 }
+    },
+    {
+      "type": "pastry",
+      "name": "Chocolate Chip Cookie",
+      "price": 1.75,
+      "ingredients": { "Flour": 1, "Sugar": 1, "Butter": 1, "Chocolate Chips": 1 }
+    },
+    {
+      "type": "pastry",
+      "name": "Oatmeal Raisin Cookie",
+      "price": 1.75,
+      "ingredients": { "Flour": 1, "Sugar": 1, "Butter": 1, "Oats": 1, "Raisins": 1 }
+    }
+  ]
 }
