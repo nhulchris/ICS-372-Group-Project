@@ -61,3 +61,25 @@ public class MenuItemFactory {
      */
     public static Beverage createBeverage(String name,
                                           double basePrice,
+                                          Map<String, Integer> ingredients,
+                                          Size size,
+                                          List<Customization> customizations) {
+        Map<String, Integer> safeIngredients =
+                (ingredients != null) ? ingredients : new HashMap<>();
+        List<Customization> safeCustomizations =
+                (customizations != null) ? customizations : new ArrayList<>();
+        return new Beverage(name, basePrice, safeIngredients, size, safeCustomizations);
+    }
+
+    /**
+     * Type-safe convenience method for creating pastries with optional variation.
+     */
+    public static Pastry createPastry(String name,
+                                      double basePrice,
+                                      Map<String, Integer> ingredients,
+                                      String variation) {
+        Map<String, Integer> safeIngredients =
+                (ingredients != null) ? ingredients : new HashMap<>();
+        return new Pastry(name, basePrice, safeIngredients, variation);
+    }
+}
