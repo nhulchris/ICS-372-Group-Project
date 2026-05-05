@@ -175,21 +175,20 @@ The diagram below shows the major classes and their relationships, organized so 
 ```mermaid
 classDiagram
     class MenuItem {
-        <<abstract>>
-        -name: String
-        -basePrice: double
-        -ingredients: Map
+        -name : String
+        -basePrice : double
+        -ingredients : Map
         +calculatePrice() double
     }
 
     class Beverage {
-        -size: Size
-        -customizations: List
+        -size : Size
+        -customizations : List
         +calculatePrice() double
     }
 
     class Pastry {
-        -variation: String
+        -variation : String
         +calculatePrice() double
     }
 
@@ -197,40 +196,40 @@ classDiagram
     MenuItem <|-- Pastry
 
     class Customization {
-        -name: String
-        -price: double
-        -ingredients: Map
+        -name : String
+        -price : double
+        -ingredients : Map
     }
 
-    Beverage "1" *-- "0..*" Customization
+    Beverage o-- Customization
 
     class Order {
-        -orderId: int
-        -customerName: String
-        -items: List
-        -status: OrderStatus
+        -orderId : int
+        -customerName : String
+        -items : List
+        -status : OrderStatus
         +calculateTotal() double
     }
 
     class OrderItem {
-        -item: MenuItem
-        -quantity: int
+        -item : MenuItem
+        -quantity : int
         +getSubtotal() double
     }
 
-    Order "1" *-- "0..*" OrderItem
+    Order *-- OrderItem
     OrderItem --> MenuItem
 
     class Ingredient {
-        -name: String
-        -quantity: int
+        -name : String
+        -quantity : int
     }
 
     class Inventory {
-        -ingredients: Map
+        -ingredients : Map
     }
 
-    Inventory "1" *-- "0..*" Ingredient
+    Inventory *-- Ingredient
 
     class OrderManager {
         +addOrder(Order)
@@ -255,7 +254,6 @@ classDiagram
     MenuManager --> MenuItem
 
     class CafeSystem {
-        <<Facade, Singleton>>
         +placeOrder(Order) boolean
         +updateOrderStatus(int, OrderStatus)
         +restockIngredient(String, int)
@@ -266,33 +264,39 @@ classDiagram
     CafeSystem --> MenuManager
 
     class MenuItemFactory {
-        <<Factory>>
-        +createBeverage(...) Beverage
-        +createPastry(...) Pastry
+        +createBeverage() MenuItem
+        +createPastry() MenuItem
     }
 
-    MenuItemFactory ..> MenuItem : creates
+    MenuItemFactory --> MenuItem
 
     class OrderObserver {
-        <<interface>>
         +updateOrders(List)
     }
+
     class InventoryObserver {
-        <<interface>>
         +updateInventory(Map)
     }
+
     class MenuObserver {
-        <<interface>>
         +updateMenu(List)
     }
 
-    OrderManager ..> OrderObserver : notifies
-    InventoryManager ..> InventoryObserver : notifies
-    MenuManager ..> MenuObserver : notifies
+    OrderManager --> OrderObserver
+    InventoryManager --> InventoryObserver
+    MenuManager --> MenuObserver
 
-    class CustomerOrderController
-    class BaristaController
-    class ManagerController
+    class CustomerOrderController {
+        +initialize()
+    }
+
+    class BaristaController {
+        +initialize()
+    }
+
+    class ManagerController {
+        +initialize()
+    }
 
     OrderObserver <|.. BaristaController
     OrderObserver <|.. ManagerController
