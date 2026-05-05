@@ -2,28 +2,50 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.brewbite.controller.BaristaController"
-            prefWidth="600" prefHeight="400">
+            prefWidth="800" prefHeight="540">
 
-    <children>
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets top="15" right="15" bottom="10" left="15"/></padding>
+            <Label text="Barista Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Back" onAction="#handleBack"/>
+        </HBox>
+    </top>
 
-        <Label text="Barista Dashboard"
-               layoutX="20" layoutY="20"
-               style="-fx-font-size: 18px;"/>
+    <center>
+        <VBox spacing="10">
+            <padding><Insets top="0" right="15" bottom="10" left="15"/></padding>
 
-        <ListView fx:id="orderListView"
-                  layoutX="20"
-                  layoutY="60"
-                  prefWidth="550"
-                  prefHeight="300"/>
+            <Label text="Pending and In-Progress Orders (FIFO)"
+                   style="-fx-font-weight: bold;"/>
+            <ListView fx:id="orderListView" prefHeight="270"/>
 
-        <Button text="Back"
-        layoutX="520"
-        layoutY="20"
-        onAction="#handleBack"/>
+            <HBox spacing="10">
+                <Button text="Start Order"        onAction="#handleStartOrder"/>
+                <Button text="Mark Ready"         onAction="#handleMarkReady"/>
+                <Button text="Complete Order"     onAction="#handleCompleteOrder"
+                        style="-fx-base: #4CAF50;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Cancel Order"       onAction="#handleCancelOrder"
+                        style="-fx-base: #B00020; -fx-text-fill: white;"/>
+            </HBox>
 
-    </children>
-</AnchorPane>
+            <Label text="Completed History" style="-fx-font-weight: bold;"/>
+            <ListView fx:id="historyListView" prefHeight="120"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox>
+            <padding><Insets top="6" right="15" bottom="12" left="15"/></padding>
+            <Label fx:id="statusLabel" text="" style="-fx-text-fill: #B00020;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
