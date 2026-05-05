@@ -45,23 +45,25 @@ The decision to organize work this way was driven by the architecture itself. Be
 
 We coordinated through three channels, each suited to a different kind of message:
 
-**Asynchronous text (Discord).** This was our primary channel for day-to-day coordination — questions, status updates, links to commits, and informal design debates. Most issues were resolved in Discord without needing a meeting.
+**Email.** This was our primary asynchronous channel for day-to-day coordination — questions, status updates, links to commits, and design clarifications. Threading made it easy to keep related discussions together, and the persistent record meant we could always go back and confirm what had been agreed.
 
-**GitHub.** Pull request reviews and Issues comments served as the formal record of design decisions. Whenever a conversation in Discord crystallized into a decision (for example, "we will route persistence through a custom Gson adapter"), we wrote it up in the corresponding Issue or PR description so it would persist.
+**GitHub.** Pull request reviews and Issues comments served as the formal record of design decisions. Whenever an email exchange crystallized into a decision (for example, "we will route persistence through a custom Gson adapter"), we wrote it up in the corresponding Issue or PR description so it would persist alongside the code.
 
-**Synchronous calls.** We used voice or video calls for the harder conversations — initial planning, mid-sprint check-ins, and the final integration push. We did not have a fixed weekly call cadence; instead we scheduled calls when something needed to be talked through that text was not handling well.
+**In-class work sessions.** Our course allotted dedicated class time for project work, and these sessions became our primary synchronous channel. We used them for harder conversations — initial planning, mid-project check-ins, and the final integration push. Being in the same room with our laptops open let us pair on tricky problems, demo new features to each other, and align on design decisions in a way that email could not match.
 
 ### What Worked
 
-Asynchronous communication worked well for status. Each of us could push code, leave a note in Discord, and pick up the next task without waiting on the others. For three people on different daily schedules, this flexibility was important.
+Email worked well for status updates and asynchronous coordination. Each of us could push code, send a quick update, and pick up the next task without waiting on the others. For three people balancing different course loads and outside commitments, this flexibility was important.
 
 GitHub Issues were excellent for tracking specific bugs and tasks. When the persistence layer had its polymorphic deserialization problem, we opened an issue, attached a stack trace, and linked the eventual fix commit. That kind of artifact is useful both for the project itself and as documentation of how the team thinks.
 
+The in-class work sessions were the single most productive form of communication we had. The hardest debugging sessions, the most consequential design choices, and the integration moments where we had to merge several streams of work all happened during these in-person sessions. There is something about being in the same room that surfaces alignment issues much faster than text-based communication does.
+
 ### What Did Not Work
 
-We were slow to schedule the first synchronous call. The first two weeks were almost entirely asynchronous, and we did not realize until later that a few minor design misalignments had been quietly accumulating during that period. Specifically, we had not nailed down whether menu items would be persisted as JSON-with-type-discriminator or as separate files for beverages and pastries. The choice eventually settled itself when one of us hit the polymorphic deserialization problem, but that resolution came with a few hours of debugging and a subsequent refactor that touched several files.
+We did not always make full use of the in-class work sessions early in the project. The first couple of sessions, we treated as work time rather than coordination time — each of us heads-down on our own task, with relatively little discussion of how the pieces would fit together. We did not realize until later that a few minor design misalignments had been quietly accumulating during that period. Specifically, we had not nailed down whether menu items would be persisted as JSON-with-type-discriminator or as separate files for beverages and pastries. The choice eventually settled itself when one of us hit the polymorphic deserialization problem, but that resolution came with a few hours of debugging and a subsequent refactor that touched several files.
 
-In hindsight, we should have scheduled a 30-minute synchronous design review at the end of week one. Discussing the data model in real time would have caught this issue when it was still cheap to fix.
+In hindsight, we should have spent the first 15 minutes of every in-class session on coordination — a quick design review and status sync — before splitting off into individual work. Discussing the data model in real time during one of those early sessions would have caught the persistence issue when it was still cheap to fix.
 
 ---
 
