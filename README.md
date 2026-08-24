@@ -4,10 +4,32 @@ A JavaFX application for ICS 372 (Object-Oriented Design and Implementation)
 that simulates a small cafe with three user roles: **Customer**, **Barista**,
 and **Manager**.
 
+![Customer order screen](docs/customer-order.png)
+
 ## Team Members
 - Chris Nhul
 - Garvin Yau
 - Salman Ahmed
+
+## Contributions
+
+- **Chris Nhul** — Customer ordering UI and controller (size selection,
+  customization checkboxes, cart management, place-order workflow). Project
+  manager: instructor communication, GitHub Projects board, weekly status
+  updates. Drove the design document. Reviewed pull requests across all three
+  role work streams.
+- **Garvin Yau** — Manager dashboard and controller (inventory management,
+  restock and add-ingredient, menu management, live sales summary, TabPane
+  layout). Owned the persistence layer, including the `MenuItemAdapter` for
+  polymorphic JSON.
+- **Salman Ahmed** — Barista dashboard and controller (active/history split,
+  four-button status workflow, FIFO queue). Role selection and login flows.
+  Core domain model (`Order`, `OrderItem`, `MenuItem`, `Beverage`, `Pastry`)
+  and the `MenuItemFactory` implementation. Maven build and executable JAR
+  configuration.
+
+All three members contributed to design discussions, code review, testing, and
+final documentation.
 
 ## Tech Stack
 - Java 21
@@ -25,7 +47,37 @@ and **Manager**.
 - **Observer** — `OrderManager`, `InventoryManager`, and `MenuManager` notify
   the UI controllers when state changes.
 
-## Login Credentials
+## Documentation
+
+- [Design Artifacts](docs/Brew_Bite_Design_Artifacts.pdf) — use cases, class
+  diagrams, sequence diagrams, conceptual-to-software class mapping
+- [Group Process Reflection](docs/Brew_Bite_Group_Process_Reflection.pdf) —
+  team process, sprint cadence, conflict resolution, lessons learned
+
+## Screens
+
+### Barista Dashboard
+Active orders sit above completed history. Both lists observe `OrderManager`,
+so an order moves between them automatically when its status changes.
+
+![Barista dashboard](docs/barista-dashboard.png)
+
+### Manager Dashboard
+Tab-based layout. Inventory updates live as orders are placed; the header strip
+carries the sales summary across all three tabs.
+
+![Manager dashboard, inventory tab](docs/manager-inventory.png)
+
+Menu management supports the full create-modify-remove lifecycle, with changes
+persisting across restarts.
+
+![Manager dashboard, menu management tab](docs/manager-menu.png)
+
+## Demo Credentials
+
+Local demo accounts only. Authentication is simulated against local JSON —
+no real credentials or personal data are stored.
+
 | Role     | Username   | Password |
 |----------|------------|----------|
 | Barista  | `barista`  | `123`    |
